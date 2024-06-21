@@ -5,7 +5,9 @@ context("Descriptives")
 test_that("Main table results match", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$splitBy <- "contBinom"
+  options$splitBy.types <- "nominal"
   options$median <- TRUE
   options$mode <- TRUE
   options$sum <- TRUE
@@ -24,20 +26,20 @@ test_that("Main table results match", {
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   table <- results[["results"]][["stats"]][["data"]]
   jaspTools::expect_equal_tables(table,
-   list(1.89652072756094, 0, 3.356094448, -0.120135614827586, -0.2223981035,
-                                -2.336742886, 0, -0.672440262484571, 0.00342000811150064, 5.692837334,
-                                0.933547444665698, 0.885861572513177, 1.10575982846952, 0.618135836828014,
-                                0.145193378675912, 0.313719932561217, -6.96786566, 58, "contNormal",
-                                1.22270479825695, -0.8465404722, -0.6015855064, 0.189093977,
-                                0.5121792992, -2.12776693668, -1.6743740472, -1.38430134284,
-                                -0.77748184225, -0.2223981035, 0.38502497975, 0.972132667292966,
-                                1, 2.179421126, -0.283499835571429, -0.405769511, -3.023963827,
-                                0, -0.508121519370532, 0.401705854633909, 5.203384953, 0.972586424088514,
-                                0.166587887409046, 0.994612407217046, 0.716632727345669, 0.15347202634745,
-                                0.365360605557062, -11.906993094, 42, "contNormal", 0.989253840590086,
-                                -0.9755913562, -0.5800195022, -0.2167812726, 0.521794901, -1.89726255948,
-                                -1.61858187715, -1.43841230624, -0.80595539125, -0.405769511,
-                                0.4460704255)
+                                 list(1.89652072756094, 0, 3.356094448, -0.120135614827586, -0.2223981035,
+                                      -2.336742886, 0, -2.336742886, 0.00342000811150064, 5.692837334,
+                                      0.933547444665698, 0.885861572513177, 1.10575982846952, 0.618135836828014,
+                                      0.145193378675912, 0.313719932561217, -6.96786566, 58, "contNormal",
+                                      1.22270479825695, -0.8465404722, -0.6015855064, 0.189093977,
+                                      0.5121792992, -2.12776693668, -1.6743740472, -1.38430134284,
+                                      -0.77748184225, -0.2223981035, 0.38502497975, 0.972132667292966,
+                                      1, 2.179421126, -0.283499835571429, -0.405769511, -3.023963827,
+                                      0, -3.023963827, 0.401705854633909, 5.203384953, 0.972586424088514,
+                                      0.166587887409046, 0.994612407217046, 0.716632727345669, 0.15347202634745,
+                                      0.365360605557062, -11.906993094, 42, "contNormal", 0.989253840590086,
+                                      -0.9755913562, -0.5800195022, -0.2167812726, 0.521794901, -1.89726255948,
+                                      -1.61858187715, -1.43841230624, -0.80595539125, -0.405769511,
+                                      0.4460704255)
   )
 })
 
@@ -45,6 +47,7 @@ test_that("Main table results match", {
 test_that("Descriptive Statistics table results match", {
   options <- analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$valid <- FALSE
   options$missing <- FALSE
   options$variance <- TRUE
@@ -54,6 +57,7 @@ test_that("Descriptive Statistics table results match", {
   options$sdCi <- TRUE
   options$varianceCi <- TRUE
   options$sdCi <- TRUE
+  options$meanCiMethod <- "normalModel"
   set.seed(1)
   results <- runAnalysis("Descriptives", "test.csv", options)
   table <- results[["results"]][["stats"]][["data"]]
@@ -63,10 +67,73 @@ test_that("Descriptive Statistics table results match", {
                                       0.756408180905588, 1.55420388476218))
 })
 
+# test confidence intervals only
+test_that("Descriptive Statistics table results match", {
+  options <- analysisOptions("Descriptives")
+  options$variables <- c("contNormal", "contGamma")
+  options$variables.types <- c("scale", "scale")
+  options$valid <- FALSE
+  options$missing <- FALSE
+  options$variance <- FALSE
+  options$minimum <- FALSE
+  options$maximum <- FALSE
+  options$meanCi <- TRUE
+  options$meanCiMethod <- "oneSampleTTest"
+  set.seed(1)
+  results <- runAnalysis("Descriptives", "test.csv", options)
+  table <- results[["results"]][["stats"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+                                 list(-0.18874858754, -0.398760810055083, 0.0212636349750834, 1.05841360919316,
+                                      "contNormal", 2.03296079621, 1.72889718286736, 2.33702440955264,
+                                      1.53241112621044, "contGamma"))
+
+  # compare against stats::t.test directly since these should be identical
+  options <- analysisOptions("Descriptives")
+  options$variables <- "extra"
+  options$variables.types <- "scale"
+  options$valid <- FALSE
+  options$missing <- FALSE
+  options$variance <- FALSE
+  options$minimum <- FALSE
+  options$maximum <- FALSE
+  options$meanCi <- TRUE
+  options$meanCiMethod <- "oneSampleTTest"
+  data("sleep")
+  set.seed(1)
+  results <- runAnalysis("Descriptives", sleep, options)
+  table <- results[["results"]][["stats"]][["data"]]
+  baseR <- c(t.test(extra ~ 1, data = sleep)$conf.int)
+  jasp  <- c(table[[1]][["MeanCILB"]], table[[1]][["MeanCIUB"]])
+  testthat::expect_equal(jasp, baseR)
+
+})
+
+
+test_that("Association matrices match", {
+  options <- jaspTools::analysisOptions("Descriptives")
+  options$associationMatrixUse <- "everything"
+  options$variables <- c("contNormal",  "contGamma", "debMiss1")
+  options$variables.types <- c("scale", "scale", "scale")
+  options$covariance <- TRUE
+  options$correlation <- TRUE
+  results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
+  table <- results[["results"]][["associationMatrix"]][["collection"]][["associationMatrix_Correlation"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+                                 list("contNormal", -0.0592003859505643, 1, "", "contGamma", 1, -0.0592003859505643,
+                                      "", "debMiss1", "", "", 1))
+
+  table <- results[["results"]][["associationMatrix"]][["collection"]][["associationMatrix_Covariance"]][["data"]]
+  jaspTools::expect_equal_tables(table,
+                                 list("contNormal", -0.0960185736017089, 1.1202393681253, "", "contGamma",
+                                      2.34828385973354, -0.0960185736017089, "", "debMiss1", "", "", ""))
+})
+
 test_that("Frequencies table matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "facGender"
+  options$variables.types <- "nominal"
   options$splitBy <- "contBinom"
+  options$splitBy.types <- "nominal"
   options$frequencyTables <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   table <- results[["results"]][["tables"]][["collection"]][["tables_facGender"]][["data"]]
@@ -87,7 +154,9 @@ test_that("Frequencies table matches with missing values", {
   split <- rep(1:2, each=15)
   data <- data.frame(x=as.factor(x), split=as.factor(split))
   options$variables <- "x"
+  options$variables.types <- "nominal"
   options$splitBy <- "split"
+  options$splitBy.types <- "nominal"
   options$frequencyTables <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", data, options)
   table <- results[["results"]][["tables"]][["collection"]][["tables_x"]][["data"]]
@@ -105,6 +174,7 @@ test_that("Distribution plot matches", {
   skip("This test need to be verified")
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$distributionPlots <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   testPlot <- results[["state"]][["figures"]][[1]][["obj"]]
@@ -114,6 +184,7 @@ test_that("Distribution plot matches", {
 test_that("Correlation plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- c("contNormal", "contGamma")
+  options$variables.types <- c("scale", "scale")
   options$correlationPlots <- TRUE
   options$distributionAndCorrelationPlotDensity <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
@@ -125,7 +196,9 @@ test_that("Boxplot matches", {
   set.seed(0)
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contGamma"
+  options$variables.types <- "scale"
   options$splitBy <- "facFive"
+  options$splitBy.types <- "nominal"
   options$boxPlotBoxPlot <- TRUE
   options$boxPlotColourPalette <- TRUE
   options$boxPlotJitter <- TRUE
@@ -141,6 +214,7 @@ test_that("Boxplot matches", {
 test_that("Q-QPlot plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$qqPlot <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   testPlot <- results[["state"]][["figures"]][[1]][["obj"]]
@@ -150,6 +224,7 @@ test_that("Q-QPlot plot matches", {
 test_that("Scatter plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- c("contcor1", "contcor2")
+  options$variables.types <- c("scale", "scale")
   # incorrectly parsed by jaspTools, which matches "enabled: distributionPlots.checked" a couple lines down and sets the option to true
   options$correlationPlots <- FALSE
   options$scatterPlot <- TRUE
@@ -163,6 +238,7 @@ test_that("Scatter plot matches", {
 test_that("Dot plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$dotPlot <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
 
@@ -173,6 +249,7 @@ test_that("Dot plot matches", {
 test_that("Pie chart matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "facFive"
+  options$variables.types <- "nominal"
   options$pieChart <- TRUE
   options$colorPalette <- "ggplot2"
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
@@ -184,6 +261,7 @@ test_that("Pie chart matches", {
 test_that("Pareto plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "facFive"
+  options$variables.types <- "nominal"
   options$paretoPlot <- TRUE
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   testPlot <- results[["state"]][["figures"]][[1]][["obj"]]
@@ -193,10 +271,13 @@ test_that("Pareto plot matches", {
 test_that("Likert plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "facFive"
+  options$variables.types <- "nominal"
   options$likertPlot <- TRUE
   options$likertPlotAssumeVariablesSameLevel <- TRUE
   options$likertPlotAdjustableFontSize <- "normal"
-  results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
+  df <- jaspTools:::loadCorrectDataset("test.csv")
+  df$facFive <- as.ordered(df$facFive)
+  results <- jaspTools::runAnalysis("Descriptives", df, options)
   testPlot <- results[["state"]][["figures"]][[1]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "likPlot")
 })
@@ -204,8 +285,11 @@ test_that("Likert plot matches", {
 test_that("Density plot matches", {
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$densityPlot <- TRUE
   options$densityPlotSeparate <- "facFive"
+  # https://github.com/jasp-stats/jaspDescriptives/pull/216 added a reuseable QML element for colorPalette, but jaspTools doesn't understand that so we have to add the default value manually
+  options$colorPalette <- "colorblind"
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   testPlot <- results[["state"]][["figures"]][[1]][["obj"]]
   jaspTools::expect_equal_plots(testPlot, "densPlot")
@@ -215,7 +299,9 @@ test_that("Analysis handles identical variables", {
   # catches this: https://github.com/jasp-stats/jasp-issues/issues/553
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- list("contNormal", "debSame")
+  options$variables.types <- c("scale", "scale")
   options$splitBy <- "facFive"
+  options$splitBy.types <- "nominal"
   options$shapiroWilkTest <- TRUE
   options$skewness <- TRUE
   options$kurtosis <- TRUE
@@ -258,7 +344,9 @@ test_that("Analysis handles identical variables", {
 test_that("Analysis explains supremum and infimum of empty sets", {
   options <- analysisOptions("Descriptives")
   options$variables <- "debMiss99"
+  options$variables.types <- "scale"
   options$splitBy <- "contBinom"
+  options$splitBy.types <- "nominal"
 
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
 
@@ -272,6 +360,7 @@ test_that("Stem and leaf tables match", {
 
   options <- jaspTools::analysisOptions("Descriptives")
   options$variables <- "contNormal"
+  options$variables.types <- "scale"
   options$stemAndLeaf <- TRUE
   options$stemAndLeafScale <- 1.2
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
@@ -285,6 +374,7 @@ test_that("Stem and leaf tables match", {
   )
 
   options$splitBy <- "contBinom"
+  options$splitBy.types <- "nominal"
   results <- jaspTools::runAnalysis("Descriptives", "test.csv", options)
   table0 <- results[["results"]][["stemAndLeaf"]][["collection"]][["stemAndLeaf_contNormal"]][["collection"]][["stemAndLeaf_contNormal_stem_and_leaf_contNormal_0"]][["data"]]
   expect_equal_tables(
@@ -310,6 +400,7 @@ options <- analysisOptions("Descriptives")
 options$correlationPlots <- FALSE
 options$distributionPlots <- TRUE
 options$variables <- "facGender"
+options$variables.types <- "nominal"
 set.seed(1)
 results <- runAnalysis("Descriptives", "debug.csv", options)
 
@@ -322,7 +413,9 @@ test_that("facGender plot matches", {
 
 options <- analysisOptions("Descriptives")
 options$variables <- "contExpon"
+options$variables.types <- "scale"
 options$splitBy   <- "facFive"
+options$splitBy.types <- "nominal"
 options$intervalPlot <- TRUE
 set.seed(1)
 results <- runAnalysis("Descriptives", "test.csv", options)
@@ -337,6 +430,7 @@ test_that("interval plot across groups matches", {
 dat <- data.frame(factorLargeCounts = factor(rep(letters[1:8], seq(10, 80, 10))))
 options <- analysisOptions("Descriptives")
 options$variables <- "factorLargeCounts"
+options$variables.types <- "nominal"
 options$dotPlot <- TRUE
 results <- runAnalysis("Descriptives", dat, options)
 

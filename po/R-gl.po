@@ -6,8 +6,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2023-07-08 03:23\n"
-"PO-Revision-Date: 2023-07-10 19:52+0000\n"
+"POT-Creation-Date: 2024-05-18 03:18\n"
+"PO-Revision-Date: 2024-05-21 16:24+0000\n"
 "Last-Translator: ecadrian <ecadrian@hotmail.com>\n"
 "Language-Team: Galician <https://hosted.weblate.org/projects/jasp/"
 "jaspdescriptives-r/gl/>\n"
@@ -16,10 +16,101 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0-dev\n"
+"X-Generator: Weblate 5.6-dev\n"
 "X-Virgin-Header: remove this line if you change anything in the header.\n"
 "X-Language: gl_ES\n"
 "X-Source-Language: C\n"
+
+msgid "Time Series Plot"
+msgstr "Gráfica de Serie temporal"
+
+msgid "Lag Plot"
+msgstr "Gráfica de retardos"
+
+msgid "Autocorrelation Function"
+msgstr "Función de Autocorrelación"
+
+msgid "Partial Autocorrelation Function"
+msgstr "Función de Autocorrelación Parcial"
+
+msgid "Descriptive Statistics"
+msgstr "Estatísticos Descritivos"
+
+msgid "Valid"
+msgstr "Válido"
+
+msgid "Missing"
+msgstr "Ausente"
+
+msgid "Mean"
+msgstr "Media"
+
+msgid "Std. Deviation"
+msgstr "Desvío Padrón"
+
+msgid "Variance"
+msgstr "Varianza"
+
+msgid "Range"
+msgstr "Rango"
+
+msgid "Minimum"
+msgstr "Mínimo"
+
+msgid "Maximum"
+msgstr "Máximo"
+
+msgid "Start"
+msgstr "Inicio"
+
+msgid "End"
+msgstr "Fin"
+
+msgid "Lag 1 Autocorrelation"
+msgstr "Autocorrelación de nivel 1"
+
+msgid "The time series data should be equally-spaced."
+msgstr "Os datos de series temporais deben estar equidistantes."
+
+msgid "The time variable should have unique values only."
+msgstr "A variable de tempo debe ter só valores que non se repitan."
+
+msgid ""
+"The 'Time' variable has a date-like format, please filter by date instead."
+msgstr ""
+"A variable 'Tempo' ten un formato que se asemella ao de datas; por favor, "
+"mellor filtre por data."
+
+msgid ""
+"The 'Time' variable is not in a date-like format (e.g., yyyy-mm-dd hh:mm:"
+"ss). Try to filter by time index instead."
+msgstr ""
+"A variable 'Tempo' non ten un formato que se asemelle ao de datas (p.e. aaaa-"
+"mm-dd hh:mm:ss). Mellor trata de filtrar mediante un índice temporal."
+
+msgid "'Start' must be in a date-like format (e.g., yyyy-mm-dd hh:mm:ss)."
+msgstr ""
+"'Inicio' debe estar nun formato semellante ao de datas (p.e. aaaa-mm-dd hh:"
+"mm:ss)."
+
+msgid "The 'Start' value of the filter should be before last observation."
+msgstr "O valor de 'Inicio' do filtro debe ser anterior á última observación."
+
+msgid "'End' must be in a date-like format (e.g., yyyy-mm-dd hh:mm:ss)."
+msgstr ""
+"'Fin' debe estar nun formato semellante ao de datas (p.e. aaaa-mm-dd hh:mm:"
+"ss)."
+
+msgid ""
+"The 'End' value of the filter should be larger/later than the 'Start' value."
+msgstr ""
+"O valor de 'Fin' do filtro debe ser maior/posterior ao valor de 'Inicio'."
+
+msgid "Lag"
+msgstr "Retardo"
+
+msgid "Association %s"
+msgstr "Asociación %s"
 
 msgid "Frequency Tables"
 msgstr "Táboas de Frecuencias"
@@ -72,9 +163,6 @@ msgstr "Gráficas de Densidade"
 msgid "Likert Plots"
 msgstr "Gráficas de Likert"
 
-msgid "Descriptive Statistics"
-msgstr "Estatísticos Descritivos"
-
 msgid ""
 "Excluded %1$i rows from the analysis that correspond to the missing values "
 "of the split-by variable %2$s"
@@ -115,26 +203,14 @@ msgstr "Superior de Varianza dos IC co %s%%"
 msgid "%s%% CI Variance Lower"
 msgstr "Inferior de Varianza dos IC co %s%%"
 
-msgid "Valid"
-msgstr "Válido"
-
-msgid "Missing"
-msgstr "Ausente"
-
 msgid "Mode"
 msgstr "Moda"
 
 msgid "Median"
 msgstr "Mediana"
 
-msgid "Mean"
-msgstr "Media"
-
 msgid "Std. Error of Mean"
 msgstr "Erro Padrón da Media"
-
-msgid "Std. Deviation"
-msgstr "Desvío Padrón"
 
 msgid "Coefficient of variation"
 msgstr "Coeficiente de variación"
@@ -147,9 +223,6 @@ msgstr "DAM (MAD) Robusta"
 
 msgid "IQR"
 msgstr "RIC(IQR)"
-
-msgid "Variance"
-msgstr "Varianza"
 
 msgid "Skewness"
 msgstr "Asimetría"
@@ -168,15 +241,6 @@ msgstr "Shapiro-Wilk"
 
 msgid "P-value of Shapiro-Wilk"
 msgstr "Valor p de Shapiro-Wilk"
-
-msgid "Range"
-msgstr "Rango"
-
-msgid "Minimum"
-msgstr "Mínimo"
-
-msgid "Maximum"
-msgstr "Máximo"
 
 msgid "25th percentile"
 msgstr "Primeiro cuartil"
@@ -216,6 +280,12 @@ msgstr ""
 "modo. Para datos continuos, infórmase do modo coa estimación da densidad más "
 "alta, pero poden existir varios modos. Aconsellamos visualizar os datos para "
 "verificar a multimodalidade."
+
+msgid "The mode is computed assuming that variables are discrete."
+msgstr "A moda calcúlase asumindo que as variables son discretas."
+
+msgid "The mode is computed assuming that variables are discreet."
+msgstr "A moda calcúlase asumindo que as variables son discretas."
 
 msgid "Not all values are available for <i>Nominal Text</i> variables"
 msgstr ""
@@ -260,6 +330,20 @@ msgstr "Recontos"
 msgid "No non-missing values!"
 msgstr "Non hai valores non ausentes!"
 
+msgid ""
+"Association cannot be computed due to missing values. Try a different 'Use' "
+"setting."
+msgstr ""
+"A asociación non se pode calcular debido a valores ausentes. Intenta unha "
+"configuración distinta de 'Usar'."
+
+msgid ""
+"Some associations cannot be computed due to missing values. Try a different "
+"'Use' setting."
+msgstr ""
+"Algunhas asociacións non se poden calcular debido a valores ausentes. "
+"Intenta unha configuración distinta de 'Usar'."
+
 msgid "Theoretical Quantiles"
 msgstr "Cuantiles Teóricos"
 
@@ -298,6 +382,112 @@ msgstr "Os elementos deben ter 2 ou máis niveis!"
 msgid "Levels within variable require at least two or more data points!"
 msgstr ""
 "Os niveis nunha variable requiren dous ou máis puntos de datos, cando menos!"
+
+msgid "Raincloud Plots"
+msgstr "Gráficas de nube chovendo"
+
+msgid "Not shown are %s observations due to missing data."
+msgstr "Hai %s observacións que non se amosan debido a datos ausentes."
+
+msgid "Interval around mean is custom."
+msgstr "O intervalo arredor da media é personalizado."
+
+msgid ""
+"<span style = 'color: darkorange'>Error with custom interval: Specified "
+"number of clouds does not match clouds in plot.</span>"
+msgstr ""
+"<span style = 'color: darkorange'>Fallo no intervalo personalizado: O número "
+"indicado de nubes non coincide coas nubes da gráfica.</span>"
+
+msgid "Interval around mean represents ± 1 standard deviation."
+msgstr "O intervalo arredor da media representa ± 1 desvío padrón."
+
+msgid ""
+"Interval around mean represents %d%% confidence interval;<br>confidence "
+"intervals were computed independently for each group."
+msgstr ""
+"O intervalo arredor da media representa o intervalo de confianza do %d%%;"
+"<br>os intervalos de confianza calculáronse independentemente para cada "
+"grupo."
+
+msgid "Points are slightly jittered from their true values."
+msgstr "Os puntos oscilan lixeiramente respecto dos seus valores verdadeiros."
+
+msgid ""
+"<span style = 'color: darkorange'> Warning! Some data is not "
+"shown<br>because it lies outside of the interval set by the custom axis "
+"limits.</span>"
+msgstr ""
+"<span style = 'color: darkorange'> Aviso! Algúns datos non se "
+"amosan<br>porque caen fóra do intervalo marcado polos límites personalizados "
+"dos eixes.</span>"
+
+msgid ""
+"<span style = 'color: darkorange'> Error with custom orientation: Specified "
+"number of clouds does not match clouds in plot.<br>Reverted to default all "
+"'R'. Point nudge set to 0.</span>"
+msgstr ""
+"<span style = 'color: darkorange'> Fallo na orientación personalizada: O "
+"número indicado de nubes non coincide coas nubes da gráfica.<br>Volta de "
+"todo 'R' ao predeterminado. Empurrón aos puntos establecido en 0.</span>"
+
+msgid ""
+"<span style = 'color: darkorange'> Error with custom color: Specified number "
+"of clouds does not match clouds in plot.<br>Ignoring custom color input.</"
+"span>"
+msgstr ""
+"<span style = 'color: darkorange'> Fallo na cor personalizada: O número "
+"indicado de nubes non coincide coas nubes da gráfica.<br>Ignorando a entrada "
+"personalizada de cor.</span>"
+
+msgid "Statistics"
+msgstr "Estatísticos"
+
+msgid "Primary Factor"
+msgstr "Factor primario"
+
+msgid "Secondary Factor"
+msgstr "Factor secundario"
+
+msgid "<i>N</i>"
+msgstr "<i>N</i>"
+
+msgid "Lower Whisker"
+msgstr "Bigote inferior"
+
+msgid "25th Percentile"
+msgstr "Primeiro cuartil"
+
+msgid "75th Percentile"
+msgstr "Terceiro cuartil"
+
+msgid "Upper Whisker"
+msgstr "Bigote superior"
+
+msgid "Lower Interval Limit"
+msgstr "Límite inferior do intervalo"
+
+msgid "Standard Deviation"
+msgstr "Desvío Padrón"
+
+msgid "Upper Interval Limit"
+msgstr "Límite superior do intervalo"
+
+msgid "<i>N</i><sub>Total</sub> = %s."
+msgstr "<i>N</i><sub>Total</sub> = %s."
+
+msgid "This excludes %s observations due to missing data."
+msgstr "Isto exclúe %s observacións debido a datos ausentes."
+
+msgid "<br>Interval around mean is custom."
+msgstr "<br>O intervalo arredor da media é personalizado."
+
+msgid ""
+"<br>Interval around mean represents %d%% confidence interval;<br>confidence "
+"intervals were computed independently for each group."
+msgstr ""
+"<br>O intervalo arredor da media representa o intervalo de confianza do %d%%;"
+"<br>os intervalos de confianza calcúlanse independentemente para cada grupo."
 
 msgid "%2$s has more than %1$s distinct values and is omitted."
 msgid_plural ""

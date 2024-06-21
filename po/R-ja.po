@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: jaspDescriptives 0.11.0\n"
-"POT-Creation-Date: 2023-07-08 03:23\n"
-"PO-Revision-Date: 2023-04-21 21:08+0000\n"
+"POT-Creation-Date: 2024-05-18 03:18\n"
+"PO-Revision-Date: 2023-12-02 03:17+0000\n"
 "Last-Translator: Daiki Hojo <dhojo.bayes@gmail.com>\n"
 "Language-Team: Japanese <https://hosted.weblate.org/projects/jasp/"
 "jaspdescriptives-r/ja/>\n"
@@ -11,7 +11,91 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.18-dev\n"
+"X-Generator: Weblate 5.3-dev\n"
+
+msgid "Time Series Plot"
+msgstr ""
+
+#, fuzzy
+msgid "Lag Plot"
+msgstr "Q-Qプロット"
+
+#, fuzzy
+msgid "Autocorrelation Function"
+msgstr "相関のプロット"
+
+msgid "Partial Autocorrelation Function"
+msgstr ""
+
+msgid "Descriptive Statistics"
+msgstr "記述統計"
+
+msgid "Valid"
+msgstr "妥当"
+
+msgid "Missing"
+msgstr "欠損値"
+
+msgid "Mean"
+msgstr "平均値"
+
+msgid "Std. Deviation"
+msgstr "標準偏差"
+
+msgid "Variance"
+msgstr "分散"
+
+msgid "Range"
+msgstr "範囲"
+
+msgid "Minimum"
+msgstr "最小値"
+
+msgid "Maximum"
+msgstr "最大値"
+
+msgid "Start"
+msgstr ""
+
+msgid "End"
+msgstr ""
+
+msgid "Lag 1 Autocorrelation"
+msgstr ""
+
+msgid "The time series data should be equally-spaced."
+msgstr ""
+
+msgid "The time variable should have unique values only."
+msgstr ""
+
+msgid ""
+"The 'Time' variable has a date-like format, please filter by date instead."
+msgstr ""
+
+msgid ""
+"The 'Time' variable is not in a date-like format (e.g., yyyy-mm-dd hh:mm:"
+"ss). Try to filter by time index instead."
+msgstr ""
+
+msgid "'Start' must be in a date-like format (e.g., yyyy-mm-dd hh:mm:ss)."
+msgstr ""
+
+msgid "The 'Start' value of the filter should be before last observation."
+msgstr ""
+
+msgid "'End' must be in a date-like format (e.g., yyyy-mm-dd hh:mm:ss)."
+msgstr ""
+
+msgid ""
+"The 'End' value of the filter should be larger/later than the 'Start' value."
+msgstr ""
+
+msgid "Lag"
+msgstr ""
+
+msgid "Association %s"
+msgstr ""
 
 msgid "Frequency Tables"
 msgstr "度数分布表"
@@ -64,9 +148,6 @@ msgstr "密度プロット"
 msgid "Likert Plots"
 msgstr "リッカートプロット"
 
-msgid "Descriptive Statistics"
-msgstr "記述統計"
-
 msgid ""
 "Excluded %1$i rows from the analysis that correspond to the missing values "
 "of the split-by variable %2$s"
@@ -105,26 +186,14 @@ msgstr "%s%% 信頼区間 分散 上限"
 msgid "%s%% CI Variance Lower"
 msgstr "%s%% 信頼区間 分散 下限"
 
-msgid "Valid"
-msgstr "妥当"
-
-msgid "Missing"
-msgstr "欠損値"
-
 msgid "Mode"
 msgstr "最頻値"
 
 msgid "Median"
 msgstr "中央値"
 
-msgid "Mean"
-msgstr "平均値"
-
 msgid "Std. Error of Mean"
 msgstr "平均の標準誤差"
-
-msgid "Std. Deviation"
-msgstr "標準偏差"
 
 msgid "Coefficient of variation"
 msgstr "変動係数"
@@ -137,9 +206,6 @@ msgstr "ロバスト中央値絶対偏差"
 
 msgid "IQR"
 msgstr "四分位範囲"
-
-msgid "Variance"
-msgstr "分散"
 
 msgid "Skewness"
 msgstr "歪度"
@@ -159,26 +225,14 @@ msgstr "シャピロ-ウィルク"
 msgid "P-value of Shapiro-Wilk"
 msgstr "シャピロ-ウィルクのP値"
 
-msgid "Range"
-msgstr "範囲"
-
-msgid "Minimum"
-msgstr "最小値"
-
-msgid "Maximum"
-msgstr "最大値"
-
-#, fuzzy
 msgid "25th percentile"
-msgstr "第%gパーセンタイル"
+msgstr "25パーセンタイル"
 
-#, fuzzy
 msgid "50th percentile"
-msgstr "第%gパーセンタイル"
+msgstr "50パーセンタイル"
 
-#, fuzzy
 msgid "75th percentile"
-msgstr "第%gパーセンタイル"
+msgstr "75パーセンタイル"
 
 msgid "%gth percentile"
 msgstr "第%gパーセンタイル"
@@ -202,6 +256,16 @@ msgid ""
 "reported. For continuous data, the mode with the highest density estimate is "
 "reported but multiple modes may exist. We recommend visualizing the data to "
 "check for multimodality."
+msgstr ""
+"複数のモード（峰）が存在します。名義や順序データでは、最初のモードが報告され"
+"ます。連続データでは、最も高密度の推定値が報告されます。ただし、複数のモード"
+"が存在するかもしれません。データの可視化を行い、多峰性について確認することを"
+"推奨します。"
+
+msgid "The mode is computed assuming that variables are discrete."
+msgstr ""
+
+msgid "The mode is computed assuming that variables are discreet."
 msgstr ""
 
 msgid "Not all values are available for <i>Nominal Text</i> variables"
@@ -246,6 +310,16 @@ msgstr "カウント"
 msgid "No non-missing values!"
 msgstr "欠測値はありません！"
 
+msgid ""
+"Association cannot be computed due to missing values. Try a different 'Use' "
+"setting."
+msgstr ""
+
+msgid ""
+"Some associations cannot be computed due to missing values. Try a different "
+"'Use' setting."
+msgstr ""
+
 msgid "Theoretical Quantiles"
 msgstr "理論上の分位数"
 
@@ -278,6 +352,100 @@ msgid "Items must have 2 or more levels!"
 msgstr "項目は、2つ以上の水準である必要があります!"
 
 msgid "Levels within variable require at least two or more data points!"
+msgstr "変数内の水準は少なくとも2つ以上のデータポイントが必要です!"
+
+msgid "Raincloud Plots"
+msgstr ""
+
+msgid "Not shown are %s observations due to missing data."
+msgstr ""
+
+msgid "Interval around mean is custom."
+msgstr ""
+
+msgid ""
+"<span style = 'color: darkorange'>Error with custom interval: Specified "
+"number of clouds does not match clouds in plot.</span>"
+msgstr ""
+
+msgid "Interval around mean represents ± 1 standard deviation."
+msgstr ""
+
+msgid ""
+"Interval around mean represents %d%% confidence interval;<br>confidence "
+"intervals were computed independently for each group."
+msgstr ""
+
+msgid "Points are slightly jittered from their true values."
+msgstr ""
+
+msgid ""
+"<span style = 'color: darkorange'> Warning! Some data is not "
+"shown<br>because it lies outside of the interval set by the custom axis "
+"limits.</span>"
+msgstr ""
+
+msgid ""
+"<span style = 'color: darkorange'> Error with custom orientation: Specified "
+"number of clouds does not match clouds in plot.<br>Reverted to default all "
+"'R'. Point nudge set to 0.</span>"
+msgstr ""
+
+msgid ""
+"<span style = 'color: darkorange'> Error with custom color: Specified number "
+"of clouds does not match clouds in plot.<br>Ignoring custom color input.</"
+"span>"
+msgstr ""
+
+#, fuzzy
+msgid "Statistics"
+msgstr "記述統計"
+
+msgid "Primary Factor"
+msgstr ""
+
+msgid "Secondary Factor"
+msgstr ""
+
+msgid "<i>N</i>"
+msgstr ""
+
+msgid "Lower Whisker"
+msgstr ""
+
+#, fuzzy
+msgid "25th Percentile"
+msgstr "25パーセンタイル"
+
+#, fuzzy
+msgid "75th Percentile"
+msgstr "75パーセンタイル"
+
+msgid "Upper Whisker"
+msgstr ""
+
+msgid "Lower Interval Limit"
+msgstr ""
+
+#, fuzzy
+msgid "Standard Deviation"
+msgstr "標準偏差"
+
+msgid "Upper Interval Limit"
+msgstr ""
+
+msgid "<i>N</i><sub>Total</sub> = %s."
+msgstr ""
+
+msgid "This excludes %s observations due to missing data."
+msgstr ""
+
+msgid "<br>Interval around mean is custom."
+msgstr ""
+
+msgid ""
+"<br>Interval around mean represents %d%% confidence interval;<br>confidence "
+"intervals were computed independently for each group."
 msgstr ""
 
 msgid "%2$s has more than %1$s distinct values and is omitted."

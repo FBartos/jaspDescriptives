@@ -19,23 +19,26 @@
 
 Descriptives <- function(
           data = NULL,
-          version = "0.17.1",
+          version = "0.19",
           formula = NULL,
+          associationMatrixUse = "everything",
           boxPlot = FALSE,
           boxPlotBoxPlot = TRUE,
           boxPlotColourPalette = FALSE,
           boxPlotJitter = FALSE,
           boxPlotOutlierLabel = FALSE,
           boxPlotViolin = FALSE,
-          chartType = "_1noCharts",
-          chartValues = "_1frequencies",
           ciBootstrapSamples = 1000,
           coefficientOfVariation = FALSE,
           colorPalette = "colorblind",
+          correlation = FALSE,
           correlationPlots = FALSE,
+          covariance = FALSE,
+          customHistogramPosition = "stack",
           densityPlot = FALSE,
           densityPlotSeparate = "",
           densityPlotTransparency = 20,
+          densityPlotType = "density",
           descriptivesTableTransposed = FALSE,
           distributionAndCorrelationPlotDensity = FALSE,
           distributionAndCorrelationPlotHistogramBinWidthType = "sturges",
@@ -49,6 +52,7 @@ Descriptives <- function(
           heatmapDisplayValueRelativeTextSize = 1,
           heatmapHorizontalAxis = "",
           heatmapLegend = FALSE,
+          heatmapPlot = FALSE,
           heatmapStatisticContinuous = "mean",
           heatmapStatisticDiscrete = "mode",
           heatmapTileWidthHeightRatio = 1,
@@ -65,7 +69,7 @@ Descriptives <- function(
           mean = TRUE,
           meanCi = FALSE,
           meanCiLevel = 0.95,
-          meanCiMethod = "normalModel",
+          meanCiMethod = "oneSampleTTest",
           median = FALSE,
           minimum = TRUE,
           missing = TRUE,
@@ -124,7 +128,7 @@ Descriptives <- function(
       options$formula <- jaspBase::jaspFormula(formula, data)
    }
 
-   optionsWithFormula <- c("colorPalette", "densityPlotSeparate", "distributionAndCorrelationPlotHistogramBinWidthType", "heatmapHorizontalAxis", "heatmapVerticalAxis", "likertPlotAdjustableFontSize", "meanCiMethod", "splitBy", "variables")
+   optionsWithFormula <- c("associationMatrixUse", "colorPalette", "densityPlotSeparate", "distributionAndCorrelationPlotHistogramBinWidthType", "heatmapHorizontalAxis", "heatmapVerticalAxis", "likertPlotAdjustableFontSize", "meanCiMethod", "splitBy", "variables")
    for (name in optionsWithFormula) {
       if ((name %in% optionsWithFormula) && inherits(options[[name]], "formula")) options[[name]] = jaspBase::jaspFormula(options[[name]], data)   }
 

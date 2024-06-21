@@ -53,5 +53,5 @@ state
 Rproj.user
 .Rproj.user
 /.Rprofile
-/renv.lock
 /renv
+_processedLockFile.lock
